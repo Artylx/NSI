@@ -9,52 +9,56 @@ def aleatoire():
     """
     return random.randint(1, 1000)
 
+def afficher(text: str, label):
+        """
+        Fonction qui affiche un text sur le label
+        Args:
+            text (str): Texte a afficher
+            label (Tkinter.Label): Label sur lequel afficher le texte
+        """
+        label.configure(text=text)
+        pass
+
+def comparaison(val_saisie: int, nombre_mystere: int, label):
+    """
+    Fonction qui applique la logique de la comparaison pour
+    le jeu et qui le résultat à l'écran avec la fonction afficher()
+    Args:
+        val_saisie (int): Valeur entrée par l'utilisateur
+        nombre_mystere (int): Valeur du nombre aléatoire
+        label (Tkinter.Label): Label sur lequel afficher le texte
+    """
+    if (val_saisie > nombre_mystere):
+        # Trop grand
+        afficher("Trop grand", label)
+    elif (val_saisie < nombre_mystere):
+        # Trop petit
+        afficher("Trop petit", label)
+    else:
+        # =
+        afficher("Gagné")
+
+def saisie_graphique(entry, nombre_mystere, label):
+    """
+    Fonction qui est appelée par l'entry de l'interface utilisateur
+    Args:
+        event: Event de l'entry
+        nombre_mystere (int): Nombre mystère à deviner
+        entry (Tkinter.Entry): Entry de l'interface utilisateur
+    """
+    text = entry.get()
+    try:
+        nombre = int(text)
+        comparaison(nombre, nombre_mystere, label)
+    except:
+        afficher("Veuillez saisir un nombre", label)
+        entry.delete(0, "end")
+
 def partie():
     """
     Fonction qui lance la partie
     """
     nombre_mystere = aleatoire()
-
-    def afficher(text: str):
-        """
-        Fonction qui affiche un text sur le label
-        Args:
-            text (str): Texte a afficher
-        """
-        label.configure(text=text)
-        pass
-
-    def comparaison(val_saisie: int, nombre_mystere: int):
-        """
-        Fonction qui applique la logique de la comparaison pour
-        le jeu et qui le résultat à l'écran avec la fonction afficher()
-        Args:
-            val_saisie (int): Valeur entrée par l'utilisateur
-            nombre_mystere (int): Valeur du nombre aléatoire
-        """
-        if (val_saisie > nombre_mystere):
-            # Trop grand
-            afficher("Trop grand")
-        elif (val_saisie < nombre_mystere):
-            # Trop petit
-            afficher("Trop petit")
-        else:
-            # =
-            afficher("Gagné")
-
-    def saisie_graphique(event):
-        """
-        Fonction qui est appelée par l'entry de l'interface utilisateur
-        Args:
-            event: Event de l'entry
-        """
-        text = entry.get()
-        try:
-            nombre = int(text)
-            comparaison(nombre, nombre_mystere)
-        except:
-            afficher("Veuillez saisir un nombre")
-            entry.delete(0, "end")
 
     root = tk.Tk()
     root.geometry("400x400")
@@ -62,10 +66,11 @@ def partie():
 
     entry = tk.Entry(root)
     entry.pack(pady=10)
-    entry.bind("<Return>", saisie_graphique)
 
     label = tk.Label(root)
     label.pack(pady=10)
+
+    entry.bind("<Return>", lambda e: saisie_graphique(entry, nombre_mystere, label))
 
     root.mainloop()
 

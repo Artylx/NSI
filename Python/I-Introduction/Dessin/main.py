@@ -1,7 +1,5 @@
 import tkinter
-import math
 import random
-import time
 
 def dessin_damier():
     pos_start = (0, 0)
