@@ -231,7 +231,7 @@ def open(controls):
     """
     Owner: ARTHUR
     """
-    pygame.mixer.music.load(custom_tk.get_resource_path("data/porte_ouverture.wav"))
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/porte_ouverture.mp3"))
     pygame.mixer.music.play()
 
     if not DEBUG:
