@@ -21,7 +21,7 @@ centered_x = WIDTH_ROOT // 2 - 100 // 2
 gap = 170 # 170px
 
 # Fonctions générales
-def create_img(master, img_path, resize=(100, 100), racne_path="D:\\Python\\NSI\\Projet\\shifumi", cursor="hand2"):
+def create_img(master, img_path, resize=(100, 100), racne_path="C:\\Users\\PC-Portable-Arthur\\Desktop\\NSI\\Python\\I-Introduction\\Projet-1\\Pierre_feuille_ciseaux\\App", cursor="hand2"):
     """
     Fonction simple permettant de créer une image Tkinter à partir d'un label
     Args:
@@ -211,6 +211,7 @@ def resultats(master, choix_player, choix_computer, label_img_player, label_img_
 LABEL_ROCK = None
 LABEL_CISERS = None
 LABEL_PAPER = None
+
 def start(label_rock=None, label_cisers=None, label_paper=None):
     """
     Fonction qui affiche les images de départ et qui caches les autres images.
