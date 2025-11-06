@@ -64,11 +64,17 @@ root.resizable(False, False)
 root.iconbitmap(custom_tk.get_resource_path("./data/icon.ico"))
 
 def music_games():
+    """
+    Owner: DIMITRI
+    """
     pygame.mixer.music.fadeout(100)
     pygame.mixer.music.load(custom_tk.get_resource_path("data/loop_games.mp3"))
     pygame.mixer.music.play(-1)
     
 def music_win_games():
+    """
+    Owner: TOAN
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/win_sound.mp3"))
     pygame.mixer.music.play()
 
@@ -76,6 +82,9 @@ def music_win_games():
     pass
 
 def music_lose_games():
+    """
+    Owner: DIMITRI
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/lose_sound.mp3"))
     pygame.mixer.music.play()
 
@@ -84,7 +93,10 @@ def music_lose_games():
     pass
 
 def only_numbers(new_value):
-    """Autorise seulement les nombres (ou vide)."""
+    """
+    Autorise seulement les nombres (ou vide).
+    Owner: ARTHUR
+    """
     return new_value.isdigit() or new_value == ""
 vcmd = (root.register(only_numbers), "%P")
 

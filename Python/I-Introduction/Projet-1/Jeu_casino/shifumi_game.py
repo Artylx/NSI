@@ -20,6 +20,9 @@ IMG_ROCK = "./data/shifumi_rock_empty.png"
 
 # Func
 def result_solo(choice, controls):
+    """
+    Owner: TOAN
+    """
     global P_COMPUTER, P_PLAYER
     custom_tk.remove_controls(controls)
 
@@ -74,6 +77,9 @@ def result_solo(choice, controls):
     pass
 
 def start_solo(controls_remove):
+    """
+    Owner: ARTHUR
+    """
     custom_tk.remove_controls(controls_remove)
 
     if not ROOT:

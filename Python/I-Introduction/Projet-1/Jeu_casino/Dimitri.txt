@@ -1,0 +1,70 @@
+--- EXPLICATIONS Fonctions
+Dans ce fichier vous retrouvez quelques fonctions que j'ai repertorié, 
+si jms vs avez les noms des personnes sur chaques fonctions, partez du 
+principe que si vs trouvez une fonction sans nom c'est a moi.
+
+-- POUR DIMITRI
+
+- Fonctions
+<file: main.py; line: 129>
+def comparaison_nb(nombre: int, affichage_label, nombre_aleatoire: int):
+    -> Quand un argument de fonction en python a écrit ":" et après qlq chose c'est que tu défini le type de la variable demandé, 
+       - Exemple : "nombre: int" on attend un int pr l'argument nombre, la même chose pr "nombre_aleatoire: int"
+    
+    """
+    Owner: DIMITRI
+    """
+    global ESSAIS_NB -> Ligne qui permet de pouvoir modifier une variable en dehors de la fonction, qui est globale
+    ESSAIS_NB -= 1
+
+    if (nombre > nombre_aleatoire):
+        
+        if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
+            afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}") -> Ligne qui permet d'afficher le texte sur le label avec la fonctions afficher_text_nb.
+            root.update() -> Ligne qui permet d'actualiser l'affichage de la fênetre.
+
+            music_lose_games() -> Ligne qui lance la musique de game over.
+            return -> Arret de la fonction.
+        else:
+            afficher_text_nb(affichage_label, f"{nombre} est trop grand, essaye encore... Il reste {ESSAIS_NB} essais")
+        return False
+    elif (nombre < nombre_aleatoire):
+        if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
+            afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}")
+            root.update()
+
+            music_lose_games()
+            return True
+        else:
+            afficher_text_nb(affichage_label, f"{nombre} est trop petit, essaye encore... Il reste {ESSAIS_NB} essais")
+        return False
+    else:
+        afficher_text_nb(affichage_label, f"Gagné en {ESSAIS_NB_MAX - ESSAIS_NB} essais")
+        root.update()
+
+        music_win_games() -> Ligne qui lance la musique de victoire.
+        return True
+    pass -> Ligne qui permet a python de ne pas faire d'erreur si la fonction est vide (inutile donc dans ce cas)
+
+<file: main.py; line: 84>
+def music_lose_games():
+    """
+    Owner: DIMITRI
+    """
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/lose_sound.mp3")) -> Ligne qui appel l'objet "mixer" et la fonction "load()" avec en argument le lien de la musique.
+    pygame.mixer.music.play() -> Ligne qui lance la musique actuelement chargée.
+
+    while pygame.mixer.music.get_busy(): -> Ligne qui exécute un code pendant toute la musique (ici attendre le musique lorsqu'on perd une partie).
+        pass -> Ligne qui permet a python de ne pas faire d'erreur si la fonction est vide (UTILE donc dans ce cas) important.
+    pass
+
+<file: main.py; line: 66>
+def music_games():
+    """
+    Owner: DIMITRI
+    """
+    pygame.mixer.music.fadeout(100) -> Ligne qui arrête la musique en cours en daeout, en argument ici les 100 milisecondes.
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/loop_games.mp3"))
+    pygame.mixer.music.play(-1) -> Ligne qui lance la musique actuelement chargée avec en argument -1 pour qu'elle se joue en boucle.

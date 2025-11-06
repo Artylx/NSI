@@ -1,0 +1,145 @@
+--- EXPLICATIONS Fonctions
+Dans ce fichier vous retrouvez quelques fonctions que j'ai repertorié, 
+si jms vs avez les noms des personnes sur chaques fonctions, partez du 
+principe que si vs trouvez une fonction sans nom c'est a moi.
+
+-- POUR DIMITRI
+
+- Fonctions
+<file: main.py; line: 129>
+def comparaison_nb(nombre: int, affichage_label, nombre_aleatoire: int):
+    -> Quand un argument de fonction en python a écrit ":" et après qlq chose c'est que tu défini le type de la variable demandé, 
+       - Exemple : "nombre: int" on attend un int pr l'argument nombre, la même chose pr "nombre_aleatoire: int"
+    
+    """
+    Owner: DIMITRI
+    """
+    global ESSAIS_NB -> Ligne qui permet de pouvoir modifier une variable en dehors de la fonction, qui est globale
+    ESSAIS_NB -= 1
+
+    if (nombre > nombre_aleatoire):
+        
+        if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
+            afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}") -> Ligne qui permet d'afficher le texte sur le label avec la fonctions afficher_text_nb.
+            root.update() -> Ligne qui permet d'actualiser l'affichage de la fênetre.
+
+            music_lose_games() -> Ligne qui lance la musique de game over.
+            return -> Arret de la fonction.
+        else:
+            afficher_text_nb(affichage_label, f"{nombre} est trop grand, essaye encore... Il reste {ESSAIS_NB} essais")
+        return False
+    elif (nombre < nombre_aleatoire):
+        if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
+            afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}")
+            root.update()
+
+            music_lose_games()
+            return True
+        else:
+            afficher_text_nb(affichage_label, f"{nombre} est trop petit, essaye encore... Il reste {ESSAIS_NB} essais")
+        return False
+    else:
+        afficher_text_nb(affichage_label, f"Gagné en {ESSAIS_NB_MAX - ESSAIS_NB} essais")
+        root.update()
+
+        music_win_games() -> Ligne qui lance la musique de victoire.
+        return True
+    pass -> Ligne qui permet a python de ne pas faire d'erreur si la fonction est vide (inutile donc dans ce cas)
+
+<file: main.py; line: 84>
+def music_lose_games():
+    """
+    Owner: DIMITRI
+    """
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/lose_sound.mp3")) -> Ligne qui appel l'objet "mixer" et la fonction "load()" avec en argument le lien de la musique.
+    pygame.mixer.music.play() -> Ligne qui lance la musique actuelement chargée.
+
+    while pygame.mixer.music.get_busy(): -> Ligne qui exécute un code pendant toute la musique (ici attendre le musique lorsqu'on perd une partie).
+        pass -> Ligne qui permet a python de ne pas faire d'erreur si la fonction est vide (UTILE donc dans ce cas) important.
+    pass
+
+<file: main.py; line: 66>
+def music_games():
+    """
+    Owner: DIMITRI
+    """
+    pygame.mixer.music.fadeout(100) -> Ligne qui arrête la musique en cours en daeout, en argument ici les 100 milisecondes.
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/loop_games.mp3"))
+    pygame.mixer.music.play(-1) -> Ligne qui lance la musique actuelement chargée avec en argument -1 pour qu'elle se joue en boucle.
+
+-- POUR TOAN
+
+- Fonctions
+<file: shifumi_game.py; line: 22>
+def result_solo(choice, controls):
+    -> Prends en argmuent choice (le choix du joueur) et controls qui sont les images etc à supprimer, 
+    """
+    Owner: TOAN
+    """
+    global P_COMPUTER, P_PLAYER -> Ligne qui permet de modifier les variables globales du shifumi, ici les points (scores).
+    custom_tk.remove_controls(controls) -> Ligne qui permet de supprimer tous les controls entré en fonctions.
+
+    choice_computer = random.randint(0, 2) -> Ligne qui permet de récupérer le choix de l'orfinateur
+
+    img_bg = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_bg_result.png"), SIZE_WINDOW) -> Création de l'image d'arrière plan
+
+    label_title_u = custom_tk.Create_label(ROOT, "Vous", ("Arial", 32, "bold"), (235, 220), bg_color="#01193C", font_color="#13CDFE") -> Création des label au dessus des images ("Vous" et "Ordinateur")
+    label_title_computeur = custom_tk.Create_label(ROOT, "Ordinateur", ("Arial", 32, "bold"), (670, 220), bg_color="#01193C", font_color="#13CDFE")
+
+    pos_result_player = (170, 307) -> Initialisation d'une variable tuple qui comprends une liste de valeurs ici donc une position (x, y). // Je l'expliquerais moi si jamais.
+    result_p_img = None -> Initialisation d'une variable vide. // Je l'expliquerais moi si jamais.
+    if choice == ROCK: 
+        result_p_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_rock.png"), (215, 237), pos_result_player) -> Création d'une image si je joueur choisi la pierre.
+    elif choice == PAPER:
+        result_p_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_paper.png"), (215, 237), pos_result_player) -> Création d'une image si je joueur choisi le papier.
+    elif choice == CISERS:
+        result_p_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_cisers.png"), (215, 237), pos_result_player) -> Création d'une image si je joueur choisi les ciseaux.
+
+    pos_result_c = (650, 307) -> Encore un tuple.
+    result_c_img = None
+    if choice_computer == ROCK:
+        result_c_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_rock.png"), (215, 237), pos_result_c) -> Création de l'image pour le choix de l'ordinateur.
+    elif choice_computer == PAPER:
+        result_c_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_paper.png"), (215, 237), pos_result_c) -> ''
+    elif choice_computer == CISERS:
+        result_c_img = custom_tk.Create_img(ROOT, custom_tk.get_resource_path("./data/shifumi_cisers.png"), (215, 237), pos_result_c) -> ''
+    
+    label_result = None -> Variable vide pour le label du résultat.
+
+    // Après la logique du pierre feuille ciseaux
+    if (choice == choice_computer): -> Si ils ont tous les deux le même choix.
+        # Egalité
+        label_result = custom_tk.Create_label(ROOT, f"Egalité\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
+        
+        ROOT.update()
+        FUNC_lose()
+    elif (choice == ROCK and choice_computer == CISERS) or (choice == CISERS and choice_computer == PAPER) or (choice == PAPER and choice_computer == ROCK): -> Si le joueur gagne l'ordi (combinaison de choix gagnantes).
+        # Win player 
+        P_PLAYER += 1 -> Ajout d'un point pour le joueur.
+        label_result = custom_tk.Create_label(ROOT, f"Gagné\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
+
+        ROOT.update() -> Actualisation de la fenêtre pour afficher toutes les images/label.
+        FUNC_win() -> Appel de la fonction lorsqu'on gagne.
+    else:
+        # Win computer
+        P_COMPUTER += 1 -> Ajout d'un point pour l'ordinateur.
+        label_result = custom_tk.Create_label(ROOT, f"Perdu\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
+
+        ROOT.update()
+        FUNC_lose() -> Appel de la fonction lorsqu'on perd.
+
+    FUNC_shifumi((img_bg, label_title_u, label_title_computeur, result_p_img, result_c_img, label_result)) -> Appel de la fonction FUNC_shifumi avec en argument la liste de tous les text/images créées.
+    pass -> Ligne qui permet a python de ne pas faire d'erreur si la fonction est vide (inutile donc dans ce cas)
+
+<file: main.py; line: 74> 
+def music_win_games():
+    """
+    Owner: TOAN
+    """
+    pygame.mixer.music.load(custom_tk.get_resource_path("data/win_sound.mp3")) -> Avec le module "pygame" on récupère l'objet mixer et on charge une musique en mémoire.
+    pygame.mixer.music.play() -> Avec le module "pygame" on récupère l'objet mixer et on lance la musique chargé en mémoire.
+
+    time.sleep(3) -> On attend 3 secondes que la musique finisse. // Si besoin de précision j'expliquerais.
+    pass -> Inutile dans ce cas aussi
