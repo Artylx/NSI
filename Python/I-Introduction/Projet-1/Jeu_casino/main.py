@@ -30,6 +30,7 @@ import time
 import shifumi_game
 
 pygame.mixer.init()
+pygame.mixer.init(frequency=44100, size=-16, channels=2)
 
 IMG_EXIT = "./data/exit_img.png"
 
@@ -91,6 +92,7 @@ def afficher_text_nb(affichage_label, text: str):
     """
     Découpe un texte en lignes de maximum `max_char` caractères 
     sans couper les mots, et met à jour un label tkinter.
+    Owner: ARTHUR
     """
     max_char = 17
     mots = text.split()
@@ -113,12 +115,16 @@ def afficher_text_nb(affichage_label, text: str):
 ESSAIS_NB = 0
 ESSAIS_NB_MAX = 20
 def comparaison_nb(nombre: int, affichage_label, nombre_aleatoire: int):
+    """
+    Owner: DIMITRI
+    """
     global ESSAIS_NB
     ESSAIS_NB -= 1
 
     if (nombre > nombre_aleatoire):
         
         if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
             afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}")
             root.update()
 
@@ -129,12 +135,14 @@ def comparaison_nb(nombre: int, affichage_label, nombre_aleatoire: int):
         return False
     elif (nombre < nombre_aleatoire):
         if ESSAIS_NB == 0:
+            # Si le joueur n'a plus d'essais
             afficher_text_nb(affichage_label, f"Vous avez perdu le nombre était {nombre_aleatoire}")
             root.update()
 
             music_lose_games()
             return True
         else:
+            # A
             afficher_text_nb(affichage_label, f"{nombre} est trop petit, essaye encore... Il reste {ESSAIS_NB} essais")
         return False
     else:
@@ -146,6 +154,9 @@ def comparaison_nb(nombre: int, affichage_label, nombre_aleatoire: int):
     pass
 
 def click_btn_nb(entry, affichage_label, nombre_aleatoire, controls):
+    """
+    Owner: ARTHUR
+    """
     if ESSAIS_NB == 0:
         return
 
@@ -164,6 +175,9 @@ def click_btn_nb(entry, affichage_label, nombre_aleatoire, controls):
     return
 
 def game_mystery_nb(controls):
+    """
+    Owner: ARTHUR
+    """
     global ESSAIS_NB
 
     custom_tk.remove_controls(controls)
@@ -192,6 +206,9 @@ def game_mystery_nb(controls):
     imb_btn.bind("<Button-1>", lambda e: click_btn_nb(entry, affichage_label, nombre_aleatoire, (img_bg, entry, img_bg, affichage_label, imb_btn)))
 
 def menu_shifumi(controls):
+    """
+    Owner: ARTHUR
+    """
     custom_tk.remove_controls(controls)
     music_games()
 
@@ -211,6 +228,9 @@ def menu_shifumi(controls):
     pass
 
 def open(controls):
+    """
+    Owner: ARTHUR
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/porte_ouverture.wav"))
     pygame.mixer.music.play()
 
@@ -222,6 +242,9 @@ def open(controls):
     casino(controls)
 
 def casino(controls):
+    """
+    Owner: ARTHUR
+    """
     custom_tk.remove_controls(controls)
 
     pygame.mixer.music.load(custom_tk.get_resource_path("data/casino_ambiance.mp3"))
@@ -242,6 +265,9 @@ def casino(controls):
     pass
 
 def start():
+    """
+    Owner: ARTHUR
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("./data/rue_ambiance.mp3"))
     pygame.mixer.music.play(loops=-1)
 
