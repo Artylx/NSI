@@ -51,14 +51,14 @@ def result_solo(choice, controls):
     label_result = None
     if (choice == choice_computer):
         # Egalité
-        label_result = custom_tk.Create_label(ROOT, "Egalité\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
+        label_result = custom_tk.Create_label(ROOT, f"Egalité\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
         
         ROOT.update()
         FUNC_lose()
     elif (choice == ROCK and choice_computer == CISERS) or (choice == CISERS and choice_computer == PAPER) or (choice == PAPER and choice_computer == ROCK):
         # Win player
         P_PLAYER += 1
-        label_result = custom_tk.Create_label(ROOT, "Gagné\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
+        label_result = custom_tk.Create_label(ROOT, f"Gagné\nOrdinateur: {P_COMPUTER }\nVous: {P_PLAYER}", ("Arial", 40, "bold"), (397, 350), bg_color="#01193C", font_color="#13CDFE")
 
         ROOT.update()
         FUNC_win()
