@@ -2,6 +2,9 @@ import importlib
 import subprocess
 import sys
 
+"""
+Owner: ARTHUR
+"""
 def install_and_import(package_names):
     for package_name in package_names:
         try:
@@ -64,11 +67,17 @@ root.resizable(False, False)
 root.iconbitmap(custom_tk.get_resource_path("./data/icon.ico"))
 
 def music_games():
+    """
+    Owner: ARTHUR
+    """
     pygame.mixer.music.fadeout(100)
     pygame.mixer.music.load(custom_tk.get_resource_path("data/loop_games.mp3"))
     pygame.mixer.music.play(-1)
     
 def music_win_games():
+    """
+    Owner: ARTHUR
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/win_sound.mp3"))
     pygame.mixer.music.play()
 
@@ -76,6 +85,9 @@ def music_win_games():
     pass
 
 def music_lose_games():
+    """
+    Owner: ARTHUR
+    """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/lose_sound.mp3"))
     pygame.mixer.music.play()
 
@@ -84,7 +96,10 @@ def music_lose_games():
     pass
 
 def only_numbers(new_value):
-    """Autorise seulement les nombres (ou vide)."""
+    """
+    Autorise seulement les nombres (ou vide).
+    Owner: ARTHUR
+    """
     return new_value.isdigit() or new_value == ""
 vcmd = (root.register(only_numbers), "%P")
 
@@ -295,6 +310,8 @@ except Exception as e:
     print(e)
     input()
     exit(1)
+
+pygame.mixer.stop()
 
 # --icon=data/icon.ico 
 # pyinstaller --onefile --icon=data/icon.ico --add-data "./data/icon_app.png;."  --name=casino --add-data "./data/shifumi_paper.png;." --add-data "./data/shifumi_bg.png;." --add-data "./data/shifumi_rock.png;." --add-data "./data/shifumi_cisers.png;." --add-data "./data/loop_games.mp3;." --add-data "./data/win_sound.mp3;." --add-data "./data/lose_sound.mp3;." --add-data "./data/game_nb.png;." --add-data "./data/game_nb_btn.png;." --add-data "./data/casino_ambiance.mp3;." --add-data "./data/porte_ouverture.wav;." --add-data "./data/rue_ambiance.mp3;." --add-data "./data/exit_img.png;." --add-data "./data/entre_casino.jpg;." --add-data "./data/entre_casino_porte.jpg;." --add-data "./data/games_casino.png;." --add-data "./data/games_casino_nb.png;." --add-data "./data/games_casino_shifumi.png;." main.py
