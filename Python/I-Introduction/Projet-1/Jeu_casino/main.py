@@ -68,7 +68,7 @@ root.iconbitmap(custom_tk.get_resource_path("./data/icon.ico"))
 
 def music_games():
     """
-    Owner: ARTHUR
+    Owner: DIMITRI
     """
     pygame.mixer.music.fadeout(100)
     pygame.mixer.music.load(custom_tk.get_resource_path("data/loop_games.mp3"))
@@ -76,7 +76,7 @@ def music_games():
     
 def music_win_games():
     """
-    Owner: ARTHUR
+    Owner: TOAN
     """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/win_sound.mp3"))
     pygame.mixer.music.play()
@@ -86,7 +86,7 @@ def music_win_games():
 
 def music_lose_games():
     """
-    Owner: ARTHUR
+    Owner: DIMITRI
     """
     pygame.mixer.music.load(custom_tk.get_resource_path("data/lose_sound.mp3"))
     pygame.mixer.music.play()
