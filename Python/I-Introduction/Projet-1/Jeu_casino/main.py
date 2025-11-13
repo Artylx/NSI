@@ -25,7 +25,7 @@ except Exception as e:
     exit(1)
 
 import customtkinter as ctk
-import custom_tk as custom_tk
+import custom_tk
 import pygame
 import random
 import ctypes
