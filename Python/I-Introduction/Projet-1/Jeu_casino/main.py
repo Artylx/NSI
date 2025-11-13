@@ -301,7 +301,6 @@ shifumi_game.FUNC_win = music_win_games
 hwnd = ctypes.windll.kernel32.GetConsoleWindow()
 try:
     print("[DEBUG] Le jeu de lance...")
-    time.sleep(1)
 
     ctypes.windll.user32.ShowWindow(hwnd, 0)
     start()
