@@ -18,7 +18,7 @@ def install_and_import(package_names):
     print(f"[DEBUG] Fin d'installation des modules.")
 
 try:
-    install_and_import(("customtkinter", "pygame", "random", "ctypes", "pillow"))
+    install_and_import(("customtkinter", "pygame", "random", "ctypes"))
 except Exception as e:
     print(e)
     input()
