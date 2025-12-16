@@ -9,7 +9,4 @@
 ## Java et autres languages.
 
 - **Comparaison et différences des languaages**
-
-## C
-
-Début de la compréhension du langage C qui est utilisé en école sup.
+- **Premiers pas en C:** Travail personnel.
