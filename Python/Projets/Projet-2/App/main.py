@@ -9,9 +9,14 @@ SIZE_MAP = 11
 NUMBER_DEFAULT = 0
 NUMBER_COFFRE = 1
 NUMBER_GOUFFRE = -1
-TILE_SIZE = 20 # Pixel
+TILE_SIZE = 20 # px
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+
+NUM_COFFRE = 3
+NUM_GOUFFRE = 10
+SIZE_COFFRE = 2
+MAX_LIFE = 1
 
 # CLASS GAME
 class Game:
@@ -52,17 +57,27 @@ class Game:
         self.base_offset_y = self.screen_size[1] // 2
 
         self.annimation_level = 15
+
         self.init_img()
 
     # INIT FUNC
     def init_var(self):
+        self.pos_player = (SIZE_MAP - 1, SIZE_MAP // 2)
         self.grid = self.new_grid()
 
-        self.pos_player = (len(self.grid) - 1, len(self.grid) // 2)
+        self.afficherGrille(self.grid)
+
         self.pos_discovered = set()
         self.old_pos = tuple(self.pos_player)
         self.annimation_state = self.annimation_level
-        self.can_move = True
+        self.can_move = False
+
+        self.player_life = MAX_LIFE
+        self.objective_found = 0
+        self.coffre_found = 0
+        self.max_objective = NUM_COFFRE
+
+        self.state = self.GAME
         pass
 
     def init_img(self):
@@ -81,6 +96,12 @@ class Game:
         self.menu_text_rect = self.menu_text.get_rect(
             center=(self.screen.get_width() // 2, self.screen.get_height() - 50)
         )
+
+        self.life_text = None
+        self.life_text_rect = None
+
+        self.objective_text = None
+        self.objective_text_rect = None
 
         self.zig_wait_img = pygame.image.load(
             os.path.join(ASSETS_DIR, "zig_wait.png")
@@ -114,6 +135,41 @@ class Game:
             False
         )
 
+        self.win_img = pygame.image.load(
+            os.path.join(ASSETS_DIR, "zig_win.png")
+        ).convert_alpha()
+
+        self.win_img = pygame.transform.scale(
+            self.win_img,
+            (380, 400)
+        )
+
+        self.win_img_rect = self.win_img.get_rect(
+            center=self.screen.get_rect().center
+        )
+
+        self.loose_img = pygame.image.load(
+            os.path.join(ASSETS_DIR, "zig_loose.png")
+        ).convert_alpha()
+
+        self.loose_img = pygame.transform.scale(
+            self.loose_img,
+            (600, 400)
+        )
+
+        self.loose_img_rect = self.loose_img.get_rect(
+            center=self.screen.get_rect().center
+        )
+
+        self.btn_restart = pygame.Rect(0, 0, 220, 50)
+        self.btn_quit = pygame.Rect(0, 0, 220, 50)
+
+        center_x = self.screen.get_width() // 2
+        center_y = self.screen.get_height() // 2
+
+        self.btn_restart.center = (center_x // 2, center_y + 150)
+        self.btn_quit.center = (center_x // 2 * 3, center_y + 150)
+
     # FONCTION LOGIQUES
     def new_grid(self, size=SIZE_MAP):
         """
@@ -128,12 +184,13 @@ class Game:
         self.placerGouffres(grid)
         return grid
 
-    def placerGouffres(self, grille, nombre_gouffres=10, value=-1):
+    def placerGouffres(self, grille, nombre_gouffres=NUM_GOUFFRE, value=NUMBER_GOUFFRE):
         """
         Place des gouffres aléatoirement dans la grille.
         Args:
             grille (list): La grille de jeu.
-            nombre_gouffres (int): Le nombre de gouffres à placer.
+            nombre_gouffres (int): Le nombre de gouffres à placer (par défaut NUM_GOUFFRE donc 10 gouffres).
+            value (int): La valeur du nombre qui vas être placé dans la grille (par défaut NUMBER_GOUFFRE donc -1).
         """
         size = len(grille)
         placed = 0
@@ -144,12 +201,14 @@ class Game:
                 grille[x][y] = value
                 placed += 1
 
-    def placerCoffres(self, grille, nombre_coffres=3, value=1, size_coffres=2):
+    def placerCoffres(self, grille, nombre_coffres=NUM_COFFRE, value=NUMBER_COFFRE, size_coffres=SIZE_COFFRE):
         """
         Place des coffres aléatoirement dans la grille.
         Args:
             grille (list): La grille de jeu.
-            nombre_coffres (int): Le nombre de gouffres à placer.
+            nombre_coffres (int): Le nombre de gouffres à placer (par défaut NUM_COFFRE donc 3 coffres).
+            value (int): La valeur du nombre qui vas être placé dans la grille (par défaut NUMBER_COFFRE donc 1).
+            size_coffres (int): La taille des coffres (par défaut SIZE_COFFRE donc 2x2).
         """
         size = len(grille)
         placed = 0
@@ -181,18 +240,15 @@ class Game:
 
                 if (i, col_index) == self.pos_player:
                     print(f"| P ", end="")
-                elif (i, col_index) in self.pos_discovered:
-                    if cell == NUMBER_COFFRE:
-                        print("| C ", end="")
-                    elif cell == NUMBER_GOUFFRE:
-                        print("| G ", end="")
-                    else:
-                        print("|   ", end="")
+                elif cell == NUMBER_COFFRE:
+                    print("| C ", end="")
+                elif cell == NUMBER_GOUFFRE:
+                    print("| G ", end="")
                 else:
-                    print("| ? ", end="")
+                    print("|   ", end="")
 
             print("|")
-        print("-" * (len(grille[0]) * 4 + 1))
+        print("-" * (len(grille[0]) * 4 + 1), len(grille))
 
     # JEU
     def render(self):
@@ -214,6 +270,59 @@ class Game:
             else:
                 self.screen.blit(self.zig_walk_img, self.zig_walk_rect)
 
+            if (self.player_life == 3):
+                life_color = (0, 255, 0)
+            elif (self.player_life == 2):
+                life_color = (255, 165, 0)
+            else:
+                life_color = (255, 0, 0)
+
+            self.life_text = self.font.render(
+                f"Vie restante {self.player_life}/{MAX_LIFE}", True, life_color
+            )
+            self.life_text_rect = self.life_text.get_rect(
+                topleft=(10, 10)
+            )
+            self.screen.blit(self.life_text, self.life_text_rect)
+
+            self.objective_text = self.font.render(
+                f"Coffre trouvés {self.objective_found}/{self.max_objective}", True, (255, 255, 0)
+            )
+            self.objective_text_rect = self.objective_text.get_rect(
+                topleft=(10, 40)
+            )
+            self.screen.blit(self.objective_text, self.objective_text_rect)
+        elif self.state == self.WIN or self.state == self.LOOSE:
+            if self.state == self.WIN:
+                self.screen.blit(self.win_img, self.win_img_rect)
+                
+                win_text = self.font.render(
+                    "Vous avez gagné !", True, (0, 255, 0)
+                )
+                win_text_rect = win_text.get_rect(
+                    center=self.screen.get_rect().center
+                )
+                self.screen.blit(win_text, win_text_rect)
+            else:
+                self.screen.blit(self.loose_img, self.loose_img_rect)
+
+                win_text = self.font.render(
+                    "Vous avez perdu...", True, (255, 0, 0)
+                )
+                win_text_rect = win_text.get_rect(
+                    center=self.screen.get_rect().center
+                )
+                self.screen.blit(win_text, win_text_rect)
+
+            pygame.draw.rect(self.screen, (50, 150, 255), self.btn_restart, border_radius=8)
+            pygame.draw.rect(self.screen, (200, 50, 50), self.btn_quit, border_radius=8)
+
+            restart_text = self.font.render("Recommencer", True, (255, 255, 255))
+            quit_text = self.font.render("Quitter", True, (255, 255, 255))
+
+            self.screen.blit(restart_text, restart_text.get_rect(center=self.btn_restart.center))
+            self.screen.blit(quit_text, quit_text.get_rect(center=self.btn_quit.center))
+
         pygame.display.flip()
 
     def draw_grid_perspective(self):
@@ -232,7 +341,7 @@ class Game:
                         color = (150, 130, 90)
                 self.draw_tile_perspective(x, y, color)
 
-    def draw_tile_perspective(self, x, y, color=(0, 180, 0)):
+    def draw_tile_perspective(self, x, y, color=(0, 0, 180)):
         ox = self.grid_offset_x
         oy = self.grid_offset_y
 
@@ -286,12 +395,37 @@ class Game:
                 return True
         return False    
 
+    def discovered_pos(self, pos):
+        if not self.is_discovered(pos):
+            self.pos_discovered.add(pos)
+
+            cell_value = self.grid[pos[0]][pos[1]]
+            if cell_value == NUMBER_COFFRE:
+                self.coffre_found += 1
+
+                if self.coffre_found >= 4:
+                    self.objective_found += 1
+                    self.coffre_found = 0
+
+            elif cell_value == NUMBER_GOUFFRE:
+                self.player_life -= 1
+            
+            self.update_objectives()
+
+    def update_objectives(self):
+        if self.player_life <= 0:
+            self.state = self.LOOSE
+        elif self.objective_found >= self.max_objective:
+            self.state = self.WIN
+
     def update(self, dt):
         if self.state == self.MENU:
             if self.is_press("space"):
-                self.state = self.GAME
-
-                self.init_var()
+                self.pressed["space"] = True
+            else:
+                if self.pressed.get("space", False):
+                    self.init_var()
+                self.pressed["space"] = False
         if self.state == self.GAME:
             if self.can_move:
                 if self.is_press("down"):
@@ -326,7 +460,7 @@ class Game:
                     self.pressed["space"] = True
                 else:
                     if self.pressed.get("space", False):
-                        self.pos_discovered.add(self.pos_player)
+                        self.discovered_pos(self.pos_player)
                     self.pressed["space"] = False
 
             self.set_to()
@@ -397,14 +531,20 @@ class Game:
                     self.controls['down'] = False
                 if event.key == pygame.K_SPACE:
                     self.controls['space'] = False
+            if (self.state == self.WIN or self.state == self.LOOSE) and event.type == pygame.MOUSEBUTTONDOWN:
+                if self.btn_restart.collidepoint(event.pos):
+                    self.init_var()
+
+                elif self.btn_quit.collidepoint(event.pos):
+                    self.running = False
 
     def is_press(self, key):
         return self.controls.get(key, False)
 
     # START GAME
     def start(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             if self.handle_event():
                 running = False
                 self.debug("Exit game")
@@ -422,5 +562,5 @@ class Game:
         print(f"[DEBUG] {line}")
 
 if __name__ == "__main__":
-    game = Game(60)
+    game = Game(80)
     game.start()

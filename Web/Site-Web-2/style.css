@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(239, 228, 176);
+    margin: 0 5% 0 5%;
+    font-family: Helvetica;
+    color: navy;
+}
+
+h1 {
+    text-decoration: underline;
+    color: black;
+    text-align: center;
+    font-size: 50px;
+}
+
+img {
+    border: 5px groove white;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+table {
+    margin: 5% 0 0 0;
+}
+
+.photo2 {
+    width: 200px;
+    height: 300px;
+}
+
+p {
+    font-size: 24px;
+    font-style: italic;
+    margin: 5% 0 5% 0;
+}
+
+a {
+    text-decoration: none;
+    color: brown;
+}
+
+a:hover {
+    text-decoration: none;
+    color: red;
+}

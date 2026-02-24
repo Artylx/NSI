@@ -1,0 +1,44 @@
+
+.image {
+	height:200px;	
+}
+
+.boite {
+	height: 300px; /* Hauteur */
+	width: 200px; /* Largeur */
+	background:white; /* Couleur d'arrière plan */
+	border-radius: 20px; /* Rondeur de la boite */
+	margin:20px;/* Espace entre les boites */
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);/* Ombres */
+}   
+.grandeboite {
+	display: flex; /* Changer la disposition */
+}
+
+.grandeboite2 {
+	display: flex;
+}
+
+.grandeboite3 {
+	display: flex; 
+	
+}
+
+.footer { 
+	height: 100px;
+	width: 100vw;
+	background-color: var(--primary-color--);
+	display: flex;
+	align-items:center; 
+}
+	
+.image2 {
+	height: 80px;
+	margin: 20px;	
+}
+
+.boite2{ 
+	display: flex;
+	align-items: center; /*aligner sur l'axe Y*/
+	justify-content: center; 
+}

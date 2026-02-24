@@ -1,0 +1,243 @@
+* {
+    /* VARRIABLES D'ENVIRONEMENT */
+    --primary-color--: rgb(193, 162, 142);
+    --size-header--: 100px;
+
+    --size-container-objects--: 500px;
+
+    --size-object-img--: 260px;
+
+    --size-footer-icon--: 60px;
+}
+/* BASE PROPERTY */
+.flex {
+    display: flex;
+}
+
+.align-item-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.margin-top-15px {
+    margin-top: 15px;
+}
+
+.margin-left-30px {
+    margin-left: 30px;
+}
+
+/* FOOTER STYLE */
+.footer {
+    background: var(--primary-color--);
+    width: 100vw;
+    height: 400px;
+    margin: 20px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.contact-us-div {
+    width: auto;
+    margin-left: 50px;
+}
+
+.icon-footer {
+    height: calc(var(--size-footer-icon--) / 1.5);
+    width: calc(var(--size-footer-icon--) / 1.5);
+    margin: 0px 10px 0px 0px;
+}
+
+.link_social_network {
+    color: black;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    max-height: 26px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.tite_network {
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;   
+}
+
+/* BODY STYLE */
+body {
+    overflow: hidden visible;
+    margin: 0;
+}
+
+/* MAIN STYLE */
+.main {
+    height: auto;
+    margin: var(--size-header--) 0px 0px 0px;
+    padding: 0px;
+}
+
+.container-object {
+    height: 500px;
+}
+
+.header-container {
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title-container {
+    font-size: 2.0rem;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
+}
+
+.container-objects {
+    overflow: scroll hidden;
+    height: calc(var(--size-container-objects--) - 80px);
+    scrollbar-width: none;
+}
+
+.container {
+    height: calc(var(--size-container-objects--) - 80px);
+    padding: 0px 20px 0px 20px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -20px 0px 0px 0px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+/* BUTTON OVERFLOW */
+.scroll-button {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 45%;
+    border-radius: 40px;
+    border: none;
+    background: #74665e;
+    font-size: 1.2rem;
+    font-weight: 1000;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.scroll-button:hover {
+    background: #8a796f;
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: calc(-100vw + 120px);
+}
+
+/* OBJECTS */
+.div-object {
+    height: 370px;
+    min-width: var(--size-object-img--);
+    background-color: rgb(219 199 187);
+    margin: 0px 10px 0px 10px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-img {
+    height: var(--size-object-img--);
+    width: var(--size-object-img--);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: var(--size-object-img--) var(--size-object-img--);
+    background-color: rgb(226, 226, 226);
+    border-radius: 20px 20px 0px 0px;
+}
+
+.container-info-object-top, .container-info-object-bottom {
+    display: flex; /* Arrangement des items */
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 10px 0px 10px; /* Espace pour plus de lisibilité */
+    height: 55px;
+}
+
+.object-name, .counter-like {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.like-div {
+    display: flex;
+    align-items: center;
+}
+
+.imagelike {
+    height: 30px;
+    width: 30px;
+    background-size: 30px 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px 0px 0px 6px;
+    cursor: pointer;
+}
+
+.markname, .price {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(54, 54, 54);
+}
+
+/* IMAGES URL */
+#image001 {
+    background-image: url(../IMAGES/page1/SNEAKER-001.png);
+}
+#image002 {
+    background-image: url(../IMAGES/page1/SNEAKER-002.png);
+}
+#image003 {
+    background-image: url(../IMAGES/page1/SNEAKER-003.jpg);
+}
+#image004 {
+    background-image: url(../IMAGES/page1/SNEAKER-004.png);
+}
+#image005 {
+    background-image: url(../IMAGES/page1/SNEAKER-005.png);
+}
+#image006 {
+    background-image: url(../IMAGES/page1/OBJECT-006.png);
+}
+#image007 {
+    background-image: url(../IMAGES/page1/OBJECT-007.png);
+}
+#image008 {
+    background-image: url(../IMAGES/page1/OBJECT-008.png);
+}
+#image009 {
+    background-image: url(../IMAGES/page1/OBJECT-009.png);
+}
+#image010 {
+    background-image: url(../IMAGES/page1/OBJECT-010.png);
+}
+
+.liked {
+    background-image: url(../IMAGES/page1/liked.png);
+}
+.notliked {
+    background-image: url(../IMAGES/page1/like.png);
+}

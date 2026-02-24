@@ -1,0 +1,58 @@
+.Images {
+	height:200px;
+}
+ 
+ .boite2{ height:270px;/*hauteur*/
+ width:200px;/*largeur*/
+ background:rgb(210, 175, 153); /*fond des boites*/
+ border-radius:20px;/*rondeur de la boite*/
+ margin:20px;/*espace boite*/
+ box-shadow: 0px 5px 10px rgba(0,0,0,0.2);} /*ombre*/
+	
+.grandeboite{
+display:flex; /*disposition*/}
+
+.boite{
+ background:rgb(210, 175, 153); /*fond des boites*/
+ border-radius:20px;/*rondeur de la boite*/
+ margin:20px;/*espace boite*/
+ box-shadow: 0px 5px 10px rgba(0,0,0,0.2);} /*ombre*/
+
+ .titre{
+ text-align:center;
+ font-size: 70px;
+ color:rgb(210,175,153);}
+ 
+ .soustitre{
+ font-size: 30px;}
+ 
+ .foster{
+	height: 100px;
+	width: 100vw; /* Taille de la largeur de la page */
+	background: rgb(210, 175, 153);
+	display:flex ;
+	justify-content: space-around; /* Disposition des éléments sur l'axe X */
+ }
+ .logo{
+	 height:90px;
+	 width:90px
+ }
+ .info{
+	 font-size:35px;
+	 font-weight:bold;/*gras*/
+ }
+ 
+ .flex {
+	display: flex;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

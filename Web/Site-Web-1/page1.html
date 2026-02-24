@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'exemple</title>
+
+    <link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
+</head>
+<body>
+	<header class="header">
+		<img src="images/drapeau.png" alt="Drapeau Zanzibar" class="logo-header">
+		<h2>Mon voyage dans l'archipel de Zanzibar</h1>
+		<a href="https://www.tourlane.fr/afrique/tanzanie/sites-touristiques-zanzibar/" class="link-tourisme" target="_blank">Tourisme a Zanzibar</a>
+	</header>
+	
+	<aside class="content-img">
+		<div class="content-text-img">
+			<div>
+				<h2 class="title">Préface</h2>
+				<p class="paragraph">J'ai visité cette année l'archipel de Zanzibar. Zanzibar, en swahili Funguvisiwa ya Zanzibar, 
+					est un archipel de l'océan Indien situé en face des côtes tanzaniennes, formé de trois îles principales (Unguja, Pemba et Mafia) 
+					et de plusieurs autres petites îles.</p>
+			</div>
+
+			<div class="div-link-wiki">
+				<p class="text-link">Cliquez sur la ville Zanzibar City pour voir le wiki</p>
+				<p>→</p>
+			</div>
+			
+			<div>
+				<h2 class="title">Carnet de voyage</h2>
+				<p class="paragraph">Les îles d'Unguja et de Pemba forment depuis plusieurs siècles une entité tour à tour indépendante (sultanat de Zanzibar et État de Zanzibar), 
+					colonisée par le Royaume-Uni (protectorat de Zanzibar) ou incorporée à la Tanzanie (Gouvernement révolutionnaire de Zanzibar).
+					L'île de Mafia a quant à elle toujours été intégrée à la Tanzanie continentale (Afrique orientale allemande, protectorat de Tanganyika et 
+					État de Tanganyika).<br></p>
+			</div>
+		</div>
+		<div class="content-image-img">
+			<img src="images/carte.png" alt="Carte de l'archipel" class="image-img" usemap="#plan">
+			<map name="plan">
+				<area shape="rect" coords="140, 200, 300, 240" href="https://fr.wikipedia.org/wiki/Zanzibar_(archipel)">
+			</map>
+		</div>
+	</aside>
+
+	<aside class="img-veiwer">
+		<header>
+			<h1 class="title">Des photos et vidéos de mon voyages</h2>
+		</header>
+		<main>
+			<button class="left-button">></button>
+
+			<div class="veiwer">
+				<img src="images/bateau.jpg">
+				<img src="images/ocean.jpg">
+				<img src="images/palmier.jpg">
+				<img src="images/personnage.jpg">
+				<img src="images/plage.jpg">
+				<img src="images/plongée.jpg">
+				<img src="images/Zanzibar.jpg">
+			</div>
+
+			<button class="right-button">></button>
+		</main>
+	</aside>
+	
+	<video width="1000" height="600" loop autoplay muted class="video">
+		<source src="video/waves.mp4" type="video/mp4">
+		Votre navigateur ne supporte pas la lecture de vidéos.
+	</video>
+
+	<footer class="footer">
+		<p class="paragraph" style="margin: 0 0 0 30px">© 2024 Mon voyage à Zanzibar. Tous droits réservés.</p>
+	</footer>
+</body>
+</html>
