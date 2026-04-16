@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ val_nameWebsite }} - {{ val_titlePage }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>{{ val_nameWebsite }}</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Accueil</a>
+            <a href="{{ url_for('product_page') }}">Produits</a>
+            <a href="#">Panier</a>
+            <a href="#">Contact</a>
+            <a href="#">Profil</a>
+            <a href="#" class="logout-btn">Se déconnecter</a>
+        </nav>
+
+        <style>
+            header {
+                background-color: #1e1e2f;
+                color: white;
+                padding: 15px 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            header h1 {
+                margin: 0;
+            }
+            
+            .panier-link {
+                position: relative;  /* indispensable pour que .panier-bulle se positionne par rapport à ce lien */
+                display: inline-block; /* pour que width/height et position fonctionnent */
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 5px 10px;
+            }
+
+            .panier-bulle {
+                position: absolute;   /* positionnée par rapport à .panier-link */
+                top: -8px;            /* ajuste la bulle verticalement */
+                right: -8px;          /* ajuste horizontalement */
+                background-color: #ff3b30;
+                color: white;
+                border-radius: 50%;   /* cercle parfait */
+                width: 20px;
+                height: 20px;
+                display: flex;         /* pour centrer le texte */
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                line-height: 1;
+                z-index: 10;           /* s'assurer qu'elle soit au-dessus */
+            }
+
+            .panier-link:hover .panier-bulle {
+                transform: scale(1.2);
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin-left: 20px;
+                font-weight: bold;
+            }
+
+            nav a:hover {
+                color: #00c6ff;
+            }
+
+            .logout-btn {
+                background-color: #ff3b30;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+            .logout-btn:hover {
+                background-color: #e33228;
+            }
+        </style>
+    </header>
+
+    <!-- CONTENU -->
+    <main>
+        {% block styles %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block scripts %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 {{ val_nameWebsite }} - Tous droits réservés
+    </footer>
+
+</body>
+</html>

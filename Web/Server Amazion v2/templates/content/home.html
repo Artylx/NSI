@@ -1,0 +1,26 @@
+{% extends "common.html" %}
+
+{% block content %}
+    <div class="hero">
+        <h2>Bienvenue sur {{val_nameWebsite}}</h2>
+        <p>Les meilleures offres du moment 🔥</p>
+    </div>
+
+    <div class="welcome">
+        Bonjour <strong>{{nom}} {{prenom}}</strong>, nous sommes ravis de vous revoir !
+    </div>
+
+    <div class="product-grid">
+        {% if not produits %}
+            <p>Aucun produit disponible pour le moment.</p>
+        {% endif %}
+        {% if produits %}
+            {% for produit in produits %}
+                <div class="card">
+                    <h3>{{ produit.nom }}</h3>
+                    <p>{{ produit.prix }} €</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

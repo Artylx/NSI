@@ -1,0 +1,7 @@
+name_website=Amazion
+port=5000
+ip=localhost
+debug=False
+user_database_path=./users.json
+product_database_path=./products.json
+secret_key=a625bcb4-5c6f-431a-9084-3ccba6543c96

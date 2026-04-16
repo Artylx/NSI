@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "name": "Admin",
+        "firstname": "",
+        "email": "admin@example.com",
+        "password": "adminpass",
+        "is_admin": true
+    },
+    {
+        "id": 2,
+        "username": "Cosmos",
+        "name": "Rey",
+        "firstname": "Arthur",
+        "email": "ptitgamer81@gmail.com",
+        "password": "arthurrey",
+        "is_admin": false
+    }
+]

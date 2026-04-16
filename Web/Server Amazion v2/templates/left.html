@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ val_nameWebsite }} - {{ val_titlePage }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/left.css') }}">
+</head>
+
+<body>
+
+    <!-- CONTENU -->
+    <main>
+        {% block styles %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block scripts %}{% endblock %}
+    </main>
+
+</body>
+</html>
