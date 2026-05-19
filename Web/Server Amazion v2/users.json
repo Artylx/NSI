@@ -6,15 +6,78 @@
         "firstname": "",
         "email": "admin@example.com",
         "password": "adminpass",
-        "is_admin": true
+        "is_admin": true,
+        "orders": [
+            {
+                "id": 1,
+                "items": [
+                    {
+                        "product_id": 2,
+                        "qty": 1
+                    },
+                    {
+                        "product_id": 1,
+                        "qty": 1
+                    },
+                    {
+                        "product_id": 4,
+                        "qty": 1
+                    }
+                ],
+                "total": 359.97,
+                "date": "2026-05-18"
+            }
+        ]
     },
     {
         "id": 2,
         "username": "Cosmos",
-        "name": "Rey",
+        "name": "REY",
         "firstname": "Arthur",
         "email": "ptitgamer81@gmail.com",
         "password": "arthurrey",
-        "is_admin": false
+        "is_admin": false,
+        "orders": []
+    },
+    {
+        "id": 1,
+        "username": "Okaidi",
+        "name": "",
+        "firstname": "",
+        "email": "okaidi@gmail.com",
+        "password": "okaidipass",
+        "is_admin": false,
+        "orders": [
+            {
+                "id": 1,
+                "items": [
+                    {
+                        "product_id": 4,
+                        "qty": 1
+                    },
+                    {
+                        "product_id": 2,
+                        "qty": 1
+                    }
+                ],
+                "total": 159.98,
+                "date": "2026-05-18"
+            },
+            {
+                "id": 2,
+                "items": [
+                    {
+                        "product_id": 5,
+                        "qty": 2
+                    },
+                    {
+                        "product_id": 4,
+                        "qty": 1
+                    }
+                ],
+                "total": 85.97,
+                "date": "2026-05-18"
+            }
+        ]
     }
 ]

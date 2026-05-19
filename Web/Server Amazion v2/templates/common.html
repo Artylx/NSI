@@ -9,89 +9,131 @@
 <body>
 
     <!-- HEADER -->
-    <header>
-        <h1>{{ val_nameWebsite }}</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Accueil</a>
-            <a href="{{ url_for('product_page') }}">Produits</a>
-            <a href="#">Panier</a>
-            <a href="#">Contact</a>
-            <a href="#">Profil</a>
-            <a href="#" class="logout-btn">Se déconnecter</a>
-        </nav>
+    <header class="topbar">
+        <div class="logo"><a class="logo" href="{{ url_for('home') }}">{{ val_nameWebsite }}</a></div>
 
-        <style>
-            header {
-                background-color: #1e1e2f;
-                color: white;
-                padding: 15px 40px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        <form class="search-bar" method="GET" action="{{ url_for('home') }}">
+            <input type="text" name="q" placeholder="Rechercher un produit..." value="{{ search }}">
+            <button type="submit">🔍</button>
+        </form>
 
-            header h1 {
-                margin: 0;
-            }
-            
-            .panier-link {
-                position: relative;  /* indispensable pour que .panier-bulle se positionne par rapport à ce lien */
-                display: inline-block; /* pour que width/height et position fonctionnent */
-                color: white;
-                text-decoration: none;
-                font-weight: bold;
-                padding: 5px 10px;
-            }
-
-            .panier-bulle {
-                position: absolute;   /* positionnée par rapport à .panier-link */
-                top: -8px;            /* ajuste la bulle verticalement */
-                right: -8px;          /* ajuste horizontalement */
-                background-color: #ff3b30;
-                color: white;
-                border-radius: 50%;   /* cercle parfait */
-                width: 20px;
-                height: 20px;
-                display: flex;         /* pour centrer le texte */
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: bold;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-                line-height: 1;
-                z-index: 10;           /* s'assurer qu'elle soit au-dessus */
-            }
-
-            .panier-link:hover .panier-bulle {
-                transform: scale(1.2);
-            }
-
-            nav a {
-                color: white;
-                text-decoration: none;
-                margin-left: 20px;
-                font-weight: bold;
-            }
-
-            nav a:hover {
-                color: #00c6ff;
-            }
-
-            .logout-btn {
-                background-color: #ff3b30;
-                color: white;
-                padding: 5px 10px;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: 0.3s;
-            }
-
-            .logout-btn:hover {
-                background-color: #e33228;
-            }
-        </style>
+        <div class="header-links">
+            <div><a class="links" href="{{ url_for('account_page') }}">👤 Compte</a></div>
+            <div><a class="links" href="{{ url_for('orders_page') }}">📦 Commandes</a></div>
+            <div><div class="cart-link">
+                <a class="links" href="{{ url_for('cart_page') }}">
+                    🛒 Panier
+                    {% if nb_objets_panier > 0 %}
+                    <span class="cart-badge">
+                        {% if nb_objets_panier > 99 %}
+                            99+
+                        {% else %}
+                            {{nb_objets_panier}}
+                        {% endif %}
+                    </span>
+                    {% endif %}
+                    
+                </a>
+            </div></div>
+            <div><a class="links" href="{{ url_for('logout_page') }}">⏻ Déconnexion</a></div>
+        </div>
     </header>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f3f3;
+            color: #111;
+        }
+
+        /* ===== HEADER ===== */
+        .cart-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+
+            background: #ff3b30;
+            color: white;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            border-radius: 999px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            line-height: 1;
+
+            pointer-events: none;
+        }
+
+        .topbar {
+            background: #131921;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff9900;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            flex: 1;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background: #febd69;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .header-links div {
+            cursor: pointer;
+        }
+
+        .links {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 
     <!-- CONTENU -->
     <main>
@@ -101,9 +143,34 @@
     </main>
 
     <!-- FOOTER -->
+    <style>
+        /* ===== FOOTER ===== */
+        footer {
+            background: #131921;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width: 768px) {
+            .topbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-links {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
     <footer>
         © 2026 {{ val_nameWebsite }} - Tous droits réservés
     </footer>
-
 </body>
 </html>

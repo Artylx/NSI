@@ -1,0 +1,91 @@
+{% extends "common.html" %}
+
+{% block styles %}
+<style>
+
+.checkout-box {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #444;
+}
+
+.form-paiment input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1e88e5, #42a5f5);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    transform: scale(1.02);
+}
+
+.note {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    margin-top: 10px;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="checkout-box">
+
+    <h1>💳 Paiement</h1>
+
+    <form method="POST" action="{{ url_for('confirm_fake_payment') }}" class="form-paiment">
+
+        <label>Nom sur la carte</label>
+        <input type="text" name="name">
+
+        <label>Numéro de carte</label>
+        <input type="text" name="card_number">
+
+        <label>Date expiration</label>
+        <input type="text" name="exp">
+
+        <label>CVV</label>
+        <input type="text" name="cvv">
+
+        <button class="pay-btn" type="submit">
+            Payer maintenant
+        </button>
+
+        <div class="note">
+            Pour d'autres moyen de paiment, il y en a pas... <!--  mdr actuellement 22h flemme de faire une autre page -->
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

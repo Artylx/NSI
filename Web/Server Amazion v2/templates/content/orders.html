@@ -1,0 +1,61 @@
+{% extends "common.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center;">📦 Mes commandes</h1>
+
+{% if not orders %}
+    <p style="text-align:center;">Aucune commande</p>
+{% else %}
+
+<div style="max-width:800px;margin:auto;">
+
+    {% for order in orders %}
+
+    <div style="background:white;padding:20px;margin:15px 0;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3>Commande #{{ order.id }}</h3>
+
+            <!-- DELETE ORDER -->
+            <form method="post" action="{{ url_for('delete_order', order_id=order.id) }}">
+                <button style="background:#e53935;color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;">
+                    Supprimer
+                </button>
+            </form>
+        </div>
+
+        <p>Date : {{ order.date }}</p>
+        <p><strong>Total :</strong> {{ order.total }} €</p>
+
+        <hr>
+
+        {% for item in order["items"] %}
+
+        <div style="display:flex;gap:15px;align-items:center;margin:10px 0;">
+
+            <img src="{{ item.product.image or 'https://via.placeholder.com/80' }}"
+                 style="width:80px;height:80px;object-fit:cover;border-radius:10px;">
+
+            <div style="flex:1;">
+                <strong>{{ item.product.nom }}</strong><br>
+                <small>{{ item.product.prix }} €</small>
+            </div>
+
+            <div>
+                x{{ item.qty }}
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "common.html" %}
+
+{% block styles %}
+<style>
+
+/* ===== HERO ===== */
+.hero {
+    background: linear-gradient(135deg, #1e88e5, #42a5f5);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* ===== PAGE ===== */
+.account-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.account-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    padding: 25px;
+}
+
+.account-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* form */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* button */
+.save-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9900, #ffb84d);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    transform: scale(1.03);
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>Mon compte 👤</h1>
+</section>
+
+<div class="account-wrapper">
+
+    <div class="account-card">
+
+        <div class="account-title">Modifier mes informations</div>
+
+        <form method="POST" action="{{ url_for('account_update') }}">
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" value="{{ user.username }}">
+            </div>
+
+            <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" name="firstname" value="{{ user.firstname }}">
+            </div>
+
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" name="name" value="{{ user.name }}">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ user.email }}">
+            </div>
+
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" name="password" value="{{ user.password }}">
+            </div>
+
+            <button class="save-btn" type="submit">
+                Sauvegarder
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
